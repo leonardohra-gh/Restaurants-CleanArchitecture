@@ -2,7 +2,7 @@
 @port = 7286
 @Restaurants_API_HostAddress = {{host}}:{{port}}
 
-GET {{Restaurants_API_HostAddress}}/weatherforecast/
+GET {{Restaurants_API_HostAddress}}/weatherforecast/?numberOfResults=10&minimumTemperature=35&maximumTemperature=50
 Accept: application/json
 ProjectUrl: {{$projectUrl}}
 Guid: {{$guid}}
@@ -17,4 +17,14 @@ Content-Type:: application/json
 
 {
     "email": "test@tes.com"
+}
+
+###
+
+POST {{Restaurants_API_HostAddress}}/weatherforecast/generate?numberOfResults=3
+Content-Type: application/json
+
+{
+    "minimumTemperature": -20,
+    "maximumTemperature": 22
 }
