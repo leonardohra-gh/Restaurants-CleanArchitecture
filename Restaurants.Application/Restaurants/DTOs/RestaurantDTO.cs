@@ -20,23 +20,5 @@ namespace Restaurants.Application.Restaurants.DTOs
         public string? PostalCode { get; set; }
 
         public List<DishDTO> Dishes { get; set; } = [];
-
-        public static RestaurantDTO? FromEntity(Restaurant? restaurant)
-        {
-            if (restaurant is null) return null;
-
-            return new RestaurantDTO()
-            {
-                Id = restaurant.Id,
-                Name = restaurant.Name,
-                Description = restaurant.Description,
-                Category = restaurant.Category,
-                HasDelivery = restaurant.HasDelivery,
-                City = restaurant.Address?.City,
-                Street = restaurant.Address?.Street,
-                PostalCode = restaurant.Address?.PostalCode,
-                Dishes = [.. restaurant.Dishes.Select(DishDTO.FromEntity)]
-            };
-        }
     }
 }
