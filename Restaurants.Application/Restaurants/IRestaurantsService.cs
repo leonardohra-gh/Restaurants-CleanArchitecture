@@ -9,6 +9,7 @@ namespace Restaurants.Application.Restaurants
 {
     public interface IRestaurantsService
     {
+        Task<Restaurant> CreateRestaurant(CreateRestaurantDTO createRestaurantDTO);
         Task<IEnumerable<RestaurantDTO>> GetAllRestaurants();
         Task<RestaurantDTO?> GetRestaurantById(int id);
     }

@@ -8,6 +8,7 @@ namespace Restaurants.Domain.Repositories
 {
     public interface IRestaurantsRepository
     {
+        Task<Restaurant> Create(Restaurant restaurant);
         Task<IEnumerable<Restaurant>> GetAllAsync();
         Task<Restaurant?> GetById(int id);
     }
