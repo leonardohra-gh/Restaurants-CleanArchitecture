@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Restaurants.Domain.Exceptions;
 
 namespace Restaurants.API.Middlewares
 {
@@ -12,6 +13,12 @@ namespace Restaurants.API.Middlewares
             try
             {
                 await next.Invoke(context);
+            }
+            catch (NotFoundException notFound)
+            {
+                context.Response.StatusCode = 404;
+                await context.Response.WriteAsync(notFound.Message);
+                logger.LogWarning("{ex} - {exMessage}", notFound, notFound.Message);
             }
             catch (Exception ex)
             {
