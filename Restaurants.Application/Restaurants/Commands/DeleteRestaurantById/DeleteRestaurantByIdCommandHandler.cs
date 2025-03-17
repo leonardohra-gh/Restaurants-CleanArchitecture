@@ -16,13 +16,13 @@ namespace Restaurants.Application.Restaurants.Commands.DeleteRestaurantById
     {
         public async Task<bool> Handle(DeleteRestaurantByIdCommand request, CancellationToken cancellationToken)
         {
-            logger.LogInformation("Checking if restaurant with id {id} exists", request.Id);
+            logger.LogInformation("Checking if restaurant with id {@id} exists", request.Id);
             Restaurant? restaurant = await restaurantsRepository.GetById(request.Id);
 
             if (restaurant is null)
                 return false;
 
-            logger.LogInformation("Deleting restaurant with id {id}", request.Id);
+            logger.LogInformation("Deleting restaurant with id {@id}", request.Id);
             await restaurantsRepository.Delete(restaurant);
             return true;
         }
