@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Restaurants.Application.Restaurants.Commands.CreateRestaurant;
+using Restaurants.Application.Restaurants.Commands.UpdateRestaurantById;
 using Restaurants.Domain.Entities;
 
 namespace Restaurants.Application.Restaurants.DTOs
@@ -20,6 +21,8 @@ namespace Restaurants.Application.Restaurants.DTOs
                         Street = src.Street,
                         PostalCode = src.PostalCode
                     }));
+
+            CreateMap<UpdateRestaurantByIdCommand, Restaurant>();
 
             CreateMap<Restaurant, RestaurantDTO>()
                 .ForMember(d => d.City, opt => opt.MapFrom(src => src.Address == null ? null : src.Address.City))

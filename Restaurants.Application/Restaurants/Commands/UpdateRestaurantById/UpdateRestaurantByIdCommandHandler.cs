@@ -2,19 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Restaurants.Domain.Entities;
 using Restaurants.Domain.Repositories;
 
-namespace Restaurants.Application.Restaurants.Commands.DeleteRestaurantById
+namespace Restaurants.Application.Restaurants.Commands.UpdateRestaurantById
 {
-    public class DeleteRestaurantByIdCommandHandler(
+    public class UpdateRestaurantByIdCommandHandler(
+        ILogger logger,
         IRestaurantsRepository restaurantsRepository,
-        ILogger<DeleteRestaurantByIdCommandHandler> logger
-    ) : IRequestHandler<DeleteRestaurantByIdCommand, bool>
+        IMapper mapper
+    ) : IRequestHandler<UpdateRestaurantByIdCommand, bool>
     {
-        public async Task<bool> Handle(DeleteRestaurantByIdCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(UpdateRestaurantByIdCommand request, CancellationToken cancellationToken)
         {
             logger.LogInformation("Checking if restaurant with id {id} exists", request.Id);
             Restaurant? restaurant = await restaurantsRepository.GetById(request.Id);
@@ -22,8 +24,9 @@ namespace Restaurants.Application.Restaurants.Commands.DeleteRestaurantById
             if (restaurant is null)
                 return false;
 
-            logger.LogInformation("Deleting restaurant with id {id}", request.Id);
-            await restaurantsRepository.Delete(restaurant);
+            logger.LogInformation("Updating restaurant with id {id}", request.Id);
+            mapper.Map(request, restaurant);
+            await restaurantsRepository.SaveChangesAsync();
             return true;
         }
     }
