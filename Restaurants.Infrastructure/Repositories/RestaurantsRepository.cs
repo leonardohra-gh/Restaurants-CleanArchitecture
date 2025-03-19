@@ -13,7 +13,7 @@ namespace Restaurants.Infrastructure.Repositories
     {
         public async Task<Restaurant> Create(Restaurant restaurant)
         {
-            await dbContext.Restaurants.AddAsync(restaurant);
+            dbContext.Restaurants.Add(restaurant);
             await dbContext.SaveChangesAsync();
             return restaurant;
         }
