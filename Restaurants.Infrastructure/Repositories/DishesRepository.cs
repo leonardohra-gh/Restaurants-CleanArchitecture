@@ -18,6 +18,18 @@ namespace Restaurants.Infrastructure.Repositories
             return dish;
         }
 
+        public async Task Delete(Dish dish)
+        {
+            dbContext.Remove(dish);
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async Task DeleteList(IEnumerable<Dish> dishes)
+        {
+            dbContext.RemoveRange(dishes);
+            await dbContext.SaveChangesAsync();
+        }
+
         public async Task<Dish?> Get(int id)
         {
             var dish = await dbContext.Dishes
