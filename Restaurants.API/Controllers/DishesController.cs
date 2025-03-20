@@ -18,7 +18,7 @@ namespace Restaurants.API.Controllers
         {
             command.RestaurantId = restaurantId;
             var dish = await mediator.Send(command);
-            return CreatedAtAction(nameof(GetDish), new { restaurantId, dish.Id });
+            return CreatedAtAction(nameof(GetDish), new { restaurantId, dishId = dish.Id }, dish);
         }
 
         [HttpGet]
@@ -29,7 +29,7 @@ namespace Restaurants.API.Controllers
         }
 
         [HttpGet("{dishId}")]
-        public async Task<ActionResult<DishDTO>> GetDish([FromRoute] int dishId)
+        public async Task<ActionResult<DishDTO>> GetDish([FromRoute] int restaurantId, [FromRoute] int dishId)
         {
             var dish = await mediator.Send(new GetDishCommand(dishId));
             return Ok(dish);
