@@ -6,7 +6,7 @@ GET {{Restaurants_API_HostAddress}}/api/restaurants
 
 ###
 
-GET {{Restaurants_API_HostAddress}}/api/restaurants/5
+GET {{Restaurants_API_HostAddress}}/api/restaurants/1
 
 
 ###
@@ -29,3 +29,7 @@ Content-Type: application/json
 {
     "PostalCode": "123"
 }
+
+###
+
+GET {{Restaurants_API_HostAddress}}/api/restaurants/1/dishes/2

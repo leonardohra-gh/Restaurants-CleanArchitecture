@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Restaurants.Application.Dishes.Commands.CreateDishCommand;
+using Restaurants.Application.Dishes.Commands.CreateDish;
 using Restaurants.Domain.Entities;
 
 namespace Restaurants.Application.Dishes.DTOs

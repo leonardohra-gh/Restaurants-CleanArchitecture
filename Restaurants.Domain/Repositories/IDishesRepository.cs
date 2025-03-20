@@ -9,5 +9,7 @@ namespace Restaurants.Domain.Repositories
     public interface IDishesRepository
     {
         Task<Dish> Create(Dish dish);
+        Task<Dish?> Get(int id);
+        Task<IEnumerable<Dish>> GetAllFromRestaurant(int restaurantId);
     }
 }

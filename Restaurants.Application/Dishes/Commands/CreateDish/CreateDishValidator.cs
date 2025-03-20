@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FluentValidation;
 
-namespace Restaurants.Application.Dishes.Commands.CreateDishCommand
+namespace Restaurants.Application.Dishes.Commands.CreateDish
 {
     public class CreateDishValidator : AbstractValidator<CreateDishCommand>
     {

@@ -1,14 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Restaurants.Application.Dishes.Commands.CreateDishCommand;
+using Restaurants.Application.Dishes.Commands.CreateDish;
+using Restaurants.Application.Dishes.DTOs;
+using Restaurants.Application.Dishes.Queries.GetAllDishesFromRestaurant;
+using Restaurants.Application.Dishes.Queries.GetDish;
 
 namespace Restaurants.API.Controllers
 {
-    [Route("api/restaurant/{restaurantId}/dishes")]
+    [Route("api/restaurants/{restaurantId}/dishes")]
     [ApiController]
     public class DishesController(IMediator mediator) : ControllerBase
     {
@@ -17,7 +16,21 @@ namespace Restaurants.API.Controllers
         {
             command.RestaurantId = restaurantId;
             var dish = await mediator.Send(command);
-            return CreatedAtAction("", dish);
+            return CreatedAtAction(nameof(GetDish), dish.Id);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<DishDTO>>> GetDishesFromRestaurant([FromRoute] int restaurantId)
+        {
+            var dishes = await mediator.Send(new GetAllDishesFromRestaurantQuery(restaurantId));
+            return Ok(dishes);
+        }
+
+        [HttpGet("{dishId}")]
+        public async Task<ActionResult<DishDTO>> GetDish([FromRoute] int dishId)
+        {
+            var dish = await mediator.Send(new GetDishCommand(dishId));
+            return Ok(dish);
         }
     }
 }

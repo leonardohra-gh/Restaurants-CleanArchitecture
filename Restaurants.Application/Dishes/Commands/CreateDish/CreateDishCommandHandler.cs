@@ -10,7 +10,7 @@ using Restaurants.Domain.Entities;
 using Restaurants.Domain.Exceptions;
 using Restaurants.Domain.Repositories;
 
-namespace Restaurants.Application.Dishes.Commands.CreateDishCommand
+namespace Restaurants.Application.Dishes.Commands.CreateDish
 {
     public class CreateDishCommandHandler(
         ILogger<CreateDishCommand> logger,

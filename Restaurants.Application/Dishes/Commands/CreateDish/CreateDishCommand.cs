@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Restaurants.Domain.Entities;
 
-namespace Restaurants.Application.Dishes.Commands.CreateDishCommand
+namespace Restaurants.Application.Dishes.Commands.CreateDish
 {
     public class CreateDishCommand : IRequest<Dish>
     {
