@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Restaurants.Application.Restaurants;
+using Restaurants.Application.User;
 using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 
 namespace Restaurants.Application.Extensions
@@ -21,6 +22,9 @@ namespace Restaurants.Application.Extensions
 
             services.AddValidatorsFromAssembly(applicationAssembly)
                 .AddFluentValidationAutoValidation();
+
+            services.AddScoped<IUserContext, UserContext>();
+            services.AddHttpContextAccessor();
         }
     }
 }
