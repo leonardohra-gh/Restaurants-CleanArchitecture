@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Restaurants.Domain.Constants;
 using Restaurants.Domain.Entities;
 using Restaurants.Infrastructure.Persistance;
 
@@ -11,13 +13,32 @@ namespace Restaurants.Infrastructure.Seeders
     {
         public async Task Seed()
         {
-            if (await dbContext.Database.CanConnectAsync()
-            && !dbContext.Restaurants.Any())
+            if (await dbContext.Database.CanConnectAsync())
             {
-                var restaurants = GetRestaurants();
-                dbContext.Restaurants.AddRange(restaurants);
-                await dbContext.SaveChangesAsync();
+                if (!dbContext.Restaurants.Any())
+                {
+                    var restaurants = GetRestaurants();
+                    dbContext.Restaurants.AddRange(restaurants);
+                    await dbContext.SaveChangesAsync();
+                }
+                if (!dbContext.Roles.Any())
+                {
+                    var roles = GetRoles();
+                    dbContext.Roles.AddRange(roles);
+                    await dbContext.SaveChangesAsync();
+                }
             }
+        }
+
+        private IEnumerable<IdentityRole> GetRoles()
+        {
+            List<IdentityRole> roles = [
+                new(UserRoles.User),
+                new(UserRoles.Owner),
+                new(UserRoles.Admin),
+            ];
+
+            return roles;
         }
 
         private IEnumerable<Restaurant> GetRestaurants()
