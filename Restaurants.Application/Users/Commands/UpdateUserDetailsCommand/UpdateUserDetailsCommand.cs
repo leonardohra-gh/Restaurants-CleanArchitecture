@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+using MediatR;
 
-namespace Restaurants.Domain.Entities
+namespace Restaurants.Application.Users.Commands.UpdateUserDetailsCommand
 {
-    public class User : IdentityUser
+    public class UpdateUserDetailsCommand : IRequest
     {
         public DateOnly? DateOfBirth { get; set; }
         public string? Nationality { get; set; }

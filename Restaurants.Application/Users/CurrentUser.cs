@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Restaurants.Application.User
+namespace Restaurants.Application.Users
 {
     public record CurrentUser(string Id, string Email, IEnumerable<string> Roles)
     {

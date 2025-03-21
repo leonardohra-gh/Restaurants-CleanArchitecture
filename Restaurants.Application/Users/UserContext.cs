@@ -5,7 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
-namespace Restaurants.Application.User
+namespace Restaurants.Application.Users
 {
     public interface IUserContext
     {
