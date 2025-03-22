@@ -7,6 +7,7 @@ using Restaurants.Application.Dishes.Commands.DeleteDishesFromRestaurant;
 using Restaurants.Application.Dishes.DTOs;
 using Restaurants.Application.Dishes.Queries.GetAllDishesFromRestaurant;
 using Restaurants.Application.Dishes.Queries.GetDish;
+using Restaurants.Infrastructure.Authorization;
 
 namespace Restaurants.API.Controllers
 {
@@ -24,7 +25,7 @@ namespace Restaurants.API.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize(Policy = PolicyNames.AtLeast20)]
         public async Task<ActionResult<IEnumerable<DishDTO>>> GetDishesFromRestaurant([FromRoute] int restaurantId)
         {
             var dishes = await mediator.Send(new GetAllDishesFromRestaurantQuery(restaurantId));
