@@ -7,11 +7,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Restaurants.Application.Users
 {
-    public interface IUserContext
-    {
-        CurrentUser? GetCurrentUser();
-    }
-
     public class UserContext(IHttpContextAccessor httpContextAccessor) : IUserContext
     {
         public CurrentUser? GetCurrentUser()
