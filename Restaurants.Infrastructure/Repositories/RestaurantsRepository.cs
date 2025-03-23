@@ -11,6 +11,12 @@ namespace Restaurants.Infrastructure.Repositories
 {
     internal class RestaurantsRepository(RestaurantDbContext dbContext) : IRestaurantsRepository
     {
+        public async Task<int> CountRestaurantsOwnedByUser(string userId)
+        {
+            return await dbContext.Restaurants
+                .CountAsync(r => r.OwnerId == userId);
+        }
+
         public async Task<Restaurant> Create(Restaurant restaurant)
         {
             dbContext.Restaurants.Add(restaurant);
