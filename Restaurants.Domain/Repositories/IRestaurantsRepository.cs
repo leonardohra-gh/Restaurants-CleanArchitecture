@@ -14,5 +14,6 @@ namespace Restaurants.Domain.Repositories
         Task<Restaurant?> GetById(int id);
         Task Delete(Restaurant entity);
         Task SaveChangesAsync();
+        Task<IEnumerable<Restaurant>> GetAllMatchignAsync(string? searchPhrase);
     }
 }
